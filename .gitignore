@@ -2,4 +2,3 @@
 *.nii
 *.csv
 *.txt
-!dirs.txt
