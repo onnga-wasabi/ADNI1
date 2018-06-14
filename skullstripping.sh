@@ -2,6 +2,7 @@
 
 while read dname
 do
+	rm ${dname}_done.log
 	python createdirs.py -d $dname
 	python dumpfilenames.py -d $dname >| ${dname}_fullpath.txt
 	while read src
@@ -12,9 +13,16 @@ do
 		#echo $label
 		subject=`cat ${dname}/*.csv | grep $id | cut -d ',' -f 2 | sed -e 's/\"//g'`
 		#echo $subject
-		dst=`echo $src | awk -F '/' '{print $NF}'`
-		#echo ${FreeSurfer_DST}/${label}/${subject}/${dst}
-		#recon-all -s target -i $src -autorecon1
-		echo $SUBJECTS_DIR
+		dst_fname=`echo $src | awk -F '/' '{print $NF}'`
+		dst=`echo ${FREESURFER_DST}/${label}/${subject}/${dst_fname}.gz`
+		if [ ! -e $dst ];then
+			# recon-all -s target -i $src -autorecon1
+			echo $dst
+			# mri_convert $SUBJECTS_DIR/target/mri/brainmask.mgz file.nii.gz
+			echo $SUBJECTS_DIR/target
+			echo $dst >> ${dname}_done.log
+		else
+			echo -n '[Attention] ' && echo -n ${dst_fname}.gz && echo ' is already exits!'
+		fi
 	done < ${dname}_fullpath.txt
 done < dirs.txt

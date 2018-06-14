@@ -3,7 +3,7 @@ import os
 import argparse
 import pandas as pd
 
-DST_DIR = os.environ.get('FreeSurfer_DST')
+DST_DIR = os.environ.get('FREESURFER_DST')
 
 
 def parse():
