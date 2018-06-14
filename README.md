@@ -3,6 +3,7 @@
 対応するcsvは作成したディレクトリ名と合わせてその中に配置．
 dirs.txtにて，対象のディレクトリを指定する．.dirs.txt.templateを参照してディレクトリ名を決めてくれるといいな．
 
+
 ```
 ├── ADNI1_Baseline_3T
 │   ├── ADNI
@@ -19,4 +20,10 @@ dirs.txtにて，対象のディレクトリを指定する．.dirs.txt.template
 .bashrcに以下を追加(~/DSTにファイルを格納していく場合)
 ```
 export FREESURFER_DST=${HOME}/DST
+```
+スクリプト書くの面倒だった，以下手動で作って
+```
+$ mkdir $FREESURFER_DST/AD
+$ mkdir $FREESURFER_DST/CN
+$ mkdir $FREESURFER_DST/MCI
 ```
